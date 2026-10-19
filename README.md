@@ -1,16 +1,24 @@
-# Implicit Negative Candidate Discovery with Symbolic Evidence
+# Evidence Before Sampling: Interpretable Implicit Negative Candidate Discovery for Recommendation
 
-An unobserved user-item interaction is not necessarily a negative. This code
-first tests whether an unobserved interaction is a defensible negative, using
+[![arXiv](https://img.shields.io/badge/arXiv-2610.07708-b31b1b.svg)](https://arxiv.org/abs/2610.07708)
+
+Official code for the paper **Evidence Before Sampling: Interpretable Implicit
+Negative Candidate Discovery for Recommendation**
+([arXiv:2610.07708](https://arxiv.org/abs/2610.07708)).
+
+## Overview
+
+An unobserved user-item interaction is not necessarily a negative. We first
+test whether an unobserved interaction is a defensible negative, using
 symbolic rules over user features and four separate criteria: Scope, Evidence
 Strength, Hierarchical Contribution and Product Relevance. Validated
 candidates fill a tiered negative budget, and samplers such as Random, BNS
 and DNS can operate inside the admitted set. Positive Symbolic applies the
 same evidence in reverse to protect likely positives.
 
-The industrial dataset in the paper is proprietary and not included. This
-repository covers the public experiments on KuaiRec, KuaiRand, MIND,
-RetailRocket and Santander.
+This repository reproduces the public-dataset experiments in the paper on
+KuaiRec, KuaiRand, MIND, RetailRocket and Santander. The industrial dataset
+used in the paper is proprietary and is not included.
 
 ## Layout
 
@@ -85,3 +93,19 @@ Samplers: `random`, `bns`, `bns_smooth`, `dns`, `negative_symbolic`,
 `positive_symbolic`, `symbolic_random`, `symbolic_bns`,
 `symbolic_bns_smooth`, `symbolic_dns`. Outputs go to `artifacts/` and
 `results/`.
+
+## Citation
+
+If you use this code, please cite our paper:
+
+```bibtex
+@misc{rajpal2026evidencesamplinginterpretableimplicit,
+      title={Evidence Before Sampling: Interpretable Implicit Negative Candidate Discovery for Recommendation},
+      author={Shreya Rajpal and Sonia Sharma and Swapnil Parekh and Lisa Li and Jeyendran Balakrishnan and Nagaraj Janardhana and Andrew Mattarella-Micke},
+      year={2026},
+      eprint={2610.07708},
+      archivePrefix={arXiv},
+      primaryClass={cs.AI},
+      url={https://arxiv.org/abs/2610.07708},
+}
+```
