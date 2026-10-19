@@ -2,7 +2,7 @@
 
 All scripts are run as modules from the repository root, for example
 ``python -m experiments.negative_rules``. Data, artifacts and results are
-placed under the repository root unless ``NEGCAND_ROOT`` points elsewhere.
+placed under the repository root unless ``CANDIDATE_ROOT`` points elsewhere.
 
     data/        raw downloads and prepared tables
     artifacts/   discovered rules, sampled candidates, DNS picks
@@ -18,7 +18,7 @@ import os
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parent
-ROOT = str(Path(os.environ.get("NEGCAND_ROOT") or REPO))
+ROOT = str(Path(os.environ.get("CANDIDATE_ROOT") or REPO))
 DATA = f"{ROOT}/data"
 ARTIFACTS = f"{ROOT}/artifacts"
 RESULTS = f"{ROOT}/results"
@@ -35,9 +35,9 @@ def cell(dataset: str, condition: str = "") -> str:
 
 
 def cell_from_env() -> tuple[str, str]:
-    """(dataset, condition) from NEGCAND_DATASET and NEGCAND_CONDITION."""
-    return (os.environ.get("NEGCAND_DATASET", "kuairec"),
-            os.environ.get("NEGCAND_CONDITION", ""))
+    """(dataset, condition) from CANDIDATE_DATASET and CANDIDATE_CONDITION."""
+    return (os.environ.get("CANDIDATE_DATASET", "kuairec"),
+            os.environ.get("CANDIDATE_CONDITION", ""))
 
 
 def kuairec_table(name: str) -> str:

@@ -8,7 +8,7 @@
 # read from or written to this repository.
 set -e
 cd "$(dirname "$0")/.."
-DEST="${NEGCAND_ROOT:-.}/data/santander"
+DEST="${CANDIDATE_ROOT:-.}/data/santander"
 mkdir -p "$DEST"
 if [ ! -f "$DEST/train_ver2.csv" ]; then
   kaggle competitions download -c santander-product-recommendation -f train_ver2.csv -p "$DEST"

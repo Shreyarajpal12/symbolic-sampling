@@ -1,8 +1,8 @@
 """Positive rule discovery for Positive Symbolic.
 
     python -m experiments.positive_rules
-    NEGCAND_DATASET=mind python -m experiments.positive_rules
-    NEGCAND_DATASET=kuairec NEGCAND_CONDITION=pos05_mnar75 python -m experiments.positive_rules
+    CANDIDATE_DATASET=mind python -m experiments.positive_rules
+    CANDIDATE_DATASET=kuairec CANDIDATE_CONDITION=pos05_mnar75 python -m experiments.positive_rules
 
 The candidate rules are the same as in negative discovery. Each
 (rule, category) pair is scored with E_pos (symbolic.evidence.positive_evidence),

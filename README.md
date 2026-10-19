@@ -61,10 +61,10 @@ Set the dataset (`kuairec`, `mind` or `retailrocket`). For KuaiRec, you can
 also set a condition (`pos05`, `pos02`, `pos01` or `pos05_mnar75`).
 
 ```bash
-export NEGCAND_DATASET=kuairec NEGCAND_CONDITION=pos05_mnar75
+export CANDIDATE_DATASET=kuairec CANDIDATE_CONDITION=pos05_mnar75
 python -m experiments.negative_rules
 python -m experiments.positive_rules
-for SD in 42 1 2; do NEGCAND_SEED=$SD python -m experiments.train_recommender; done
+for SD in 42 1 2; do CANDIDATE_SEED=$SD python -m experiments.train_recommender; done
 ```
 
 Then build the result tables:
@@ -76,17 +76,15 @@ python -m analysis.negative_precision
 python -m analysis.negative_precision_report
 ```
 
-Candidate-quality experiments (appendix):
+Appendix candidate quality for KuaiRand and Santander (KuaiRec comes from the `kuairec` run above):
 
 ```bash
-NEGCAND_DATASET=kuairec  python -m experiments.negative_rules
-NEGCAND_DATASET=kuairand python -m experiments.negative_rules
-python -m experiments.santander_candidate_quality
-python -m experiments.santander_baselines
+CANDIDATE_DATASET=kuairand python -m experiments.negative_rules
+python -m experiments.santander_candidate_quality && python -m experiments.santander_baselines
 ```
 
 The LLM domain review (`experiments.llm_domain_review`) is optional and
-needs an `OPENAI_API_KEY` and a category-name file (`NEGCAND_CATEGORY_NAMES`).
+needs an `OPENAI_API_KEY` and a category-name file (`CANDIDATE_CATEGORY_NAMES`).
 Results are written to `results/`.
 
 ## Citation

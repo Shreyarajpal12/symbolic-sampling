@@ -1,9 +1,9 @@
 """Downstream recommender training with each negative sampler.
 
-    NEGCAND_DATASET=kuairec NEGCAND_SEED=42 python -m experiments.train_recommender
-    NEGCAND_DATASET=kuairec NEGCAND_CONDITION=pos05_mnar75 NEGCAND_SEED=1 \
+    CANDIDATE_DATASET=kuairec CANDIDATE_SEED=42 python -m experiments.train_recommender
+    CANDIDATE_DATASET=kuairec CANDIDATE_CONDITION=pos05_mnar75 CANDIDATE_SEED=1 \
         python -m experiments.train_recommender
-    NEGCAND_DATASET=mind NEGCAND_SAMPLERS=random,bns,dns python -m experiments.train_recommender
+    CANDIDATE_DATASET=mind CANDIDATE_SAMPLERS=random,bns,dns python -m experiments.train_recommender
 
 Requires artifacts/<cell>/rules.csv (experiments.negative_rules) and, for
 positive_symbolic, artifacts/<cell>/positive_levels.parquet
@@ -45,11 +45,11 @@ Outputs
     artifacts/<cell>/dns_picks_<sampler>_K4_s<seed>.npz    DNS picks and hardness per epoch
 
 Options (environment)
-    NEGCAND_DATASET      kuairec | mind | retailrocket            (default kuairec)
-    NEGCAND_CONDITION    pos05 | pos02 | pos01 | pos05_mnar75     (default: natural)
-    NEGCAND_SEED         default 42
-    NEGCAND_SAMPLERS     comma-separated subset of samplers.ALL_SAMPLERS (default: all)
-    NEGCAND_MAX_EPOCHS, NEGCAND_PATIENCE   override 40 and 15 (for quick checks only)
+    CANDIDATE_DATASET      kuairec | mind | retailrocket            (default kuairec)
+    CANDIDATE_CONDITION    pos05 | pos02 | pos01 | pos05_mnar75     (default: natural)
+    CANDIDATE_SEED         default 42
+    CANDIDATE_SAMPLERS     comma-separated subset of samplers.ALL_SAMPLERS (default: all)
+    CANDIDATE_MAX_EPOCHS, CANDIDATE_PATIENCE   override 40 and 15 (for quick checks only)
 """
 from __future__ import annotations
 
@@ -71,11 +71,11 @@ from symbolic import ladder
 from symbolic.discovery import behavioural_from, candidate_rules
 
 DS, CONDITION = cell_from_env()
-SEED = int(os.environ.get("NEGCAND_SEED", "42"))
+SEED = int(os.environ.get("CANDIDATE_SEED", "42"))
 K = 4
-SAMPLERS = [s for s in os.environ.get("NEGCAND_SAMPLERS", ",".join(S.ALL_SAMPLERS)).split(",") if s]
-MAX_EPOCHS = int(os.environ.get("NEGCAND_MAX_EPOCHS", "40"))
-PATIENCE = int(os.environ.get("NEGCAND_PATIENCE", "15"))
+SAMPLERS = [s for s in os.environ.get("CANDIDATE_SAMPLERS", ",".join(S.ALL_SAMPLERS)).split(",") if s]
+MAX_EPOCHS = int(os.environ.get("CANDIDATE_MAX_EPOCHS", "40"))
+PATIENCE = int(os.environ.get("CANDIDATE_PATIENCE", "15"))
 BATCH = 4096
 ANCHORS_PER_USER = 100
 unknown = [s for s in SAMPLERS if s not in S.ALL_SAMPLERS]

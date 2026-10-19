@@ -1,7 +1,7 @@
 """LLM domain review of statistically admitted (rule, category) pairs.
 
     export OPENAI_API_KEY=...
-    NEGCAND_CATEGORY_NAMES=/path/to/category_names.json \
+    CANDIDATE_CATEGORY_NAMES=/path/to/category_names.json \
         python -m experiments.llm_domain_review --dataset kuairec
 
 For every deduplicated (rule, category) pair that passes S+E+H+R in
@@ -218,7 +218,7 @@ def main():
     from openai import OpenAI
     client = OpenAI(api_key=os.environ["OPENAI_API_KEY"])
 
-    names_path = os.environ.get("NEGCAND_CATEGORY_NAMES") or f"{DATA}/{a.dataset}/category_names.json"
+    names_path = os.environ.get("CANDIDATE_CATEGORY_NAMES") or f"{DATA}/{a.dataset}/category_names.json"
     names = json.load(open(names_path, encoding="utf-8"))
     codes = json.load(open(f"{ARTIFACTS}/{a.dataset}/feature_codes.json"))
     rules = pd.read_csv(f"{ARTIFACTS}/{a.dataset}/rules.csv")

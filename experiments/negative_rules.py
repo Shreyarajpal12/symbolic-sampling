@@ -1,8 +1,8 @@
 """Negative rule discovery and intrinsic candidate quality for one cell.
 
     python -m experiments.negative_rules
-    NEGCAND_DATASET=kuairand python -m experiments.negative_rules
-    NEGCAND_DATASET=kuairec NEGCAND_CONDITION=pos05_mnar75 python -m experiments.negative_rules
+    CANDIDATE_DATASET=kuairand python -m experiments.negative_rules
+    CANDIDATE_DATASET=kuairec CANDIDATE_CONDITION=pos05_mnar75 python -m experiments.negative_rules
 
 Discovery and evaluation logs:
 
@@ -44,7 +44,7 @@ from symbolic import discovery
 
 SEED = 42
 DS, CONDITION = cell_from_env()
-R = int(os.environ.get("NEGCAND_REPLICATES", "200"))
+R = int(os.environ.get("CANDIDATE_REPLICATES", "200"))
 CELL = cell(DS, CONDITION)
 OUT = f"{RESULTS}/{CELL}"; ART = f"{ARTIFACTS}/{CELL}"
 os.makedirs(OUT, exist_ok=True); os.makedirs(ART, exist_ok=True)
